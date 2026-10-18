@@ -1,27 +1,11 @@
 
 # CrossOver Trial Reset Script
 
-This is a **bash script** designed to reset the trial period of **CrossOver** (a popular application for running Windows software on macOS). The script manipulates specific system files and resets timestamps to make CrossOver think it's a fresh installation, effectively extending your trial period for testing or educational purposes.
-
-## How It Works
-
-The script performs the following actions:
-
-1. **Kills any running instances of CrossOver**: Ensures no processes are actively using the app so that all changes can be applied safely.
-2. **Modifies CrossOver’s trial period**: The script changes the `FirstRunDate` and `SULastCheckTime` preferences, which are used to track the trial period. This makes CrossOver think it is a new installation.
-3. **Removes update timestamps**: The script finds and removes any `.update-timestamp` files inside the CrossOver bottles to ensure there are no previous markers of trial usage.
-4. **Restarts CrossOver**: Once all the changes are applied, the script restarts CrossOver so you can continue using the app.
-
-This script is perfect for users who want to reset the trial period for testing or learning purposes.
+This is a **bash script** designed to reset the trial period of **CrossOver** (a popular application for running Windows software on macOS). The script manipulates specific system files and resets timestamps to make CrossOver think it's a fresh installation, effectively extending your trial period.
 
 ## Requirements
 
-- **macOS** (Tested on macOS X)
-- **Homebrew** (If `pidof` is missing, it will be automatically installed via Homebrew)
-
-### Dependencies
-
-- `pidof`: This command is used to check if CrossOver is running. If it's not available, it will be installed using Homebrew.
+- Crossover Trial: (obviously)
 
 ## How to Run the Script
 
@@ -65,19 +49,8 @@ The script works by performing the following actions:
 4. **Shows a notification**: Once the reset is complete, a notification will appear informing you that the trial has been reset and bottles have been cleaned.
 
 ### Important Notes:
-- This script is **intended for educational purposes only**. Using it outside of a testing or educational context may violate CrossOver's terms of service.
 - **Backup your data** before running the script. This script will modify system files related to CrossOver.
 - **Use at your own risk**. While the script is tested on macOS, we recommend reviewing the script and performing a test run on a non-production machine if you're unsure.
-
----
-
-## Customizing the Script
-
-You can modify the script to add new features or adjust its behavior. Here are a few ideas:
-
-- **Add a backup option**: You could modify the script to create a backup of the bottles before resetting them.
-- **Log the actions**: The script currently logs actions to `/tmp/crossover_reset_log.txt`. You can customize this to store logs in a more permanent location if needed.
-- **Schedule the script**: You could use **cron** to schedule this script to run periodically, such as every 15 days, to automate the trial reset process.
 
 ---
 
@@ -89,7 +62,4 @@ This script is open-source and shared under the **MIT License**. Feel free to mo
 
 ## Troubleshooting
 
-If the script doesn't work as expected, here are some common issues and solutions:
-
-- **Script fails to find CrossOver**: Ensure that CrossOver is installed in the default path (`~/Applications/CrossOver.app` or `/Applications/CrossOver.app`). If you have CrossOver in a custom location, modify the script to reflect the correct path.
-- **`pidof` command not found**: The script will automatically install `pidof` if it’s missing. Make sure you have Homebrew installed for this to work.
+Open a issue on GitHub. https://github.com/stacle-studios/crossover-trial-reset. Please provide the output of the script

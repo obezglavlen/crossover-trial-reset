@@ -4,17 +4,12 @@ echo "=== CrossOver Trial Reset Script ==="
 echo "Started at: $(date)"
 echo
 
-# 
-if ! command -v pgrep >/dev/null 2>&1; then
-    echo "[INFO] 'pgrep' not found. Installing."
-    brew install proctools || { echo "[ERROR] Failed to install pgrep. The script should still be able to continue."; }
-fi
-#
-
 # Locate CrossOver binary
 CO_PWD=~/Applications/CrossOver.app/Contents/MacOS
-[ -d "${CO_PWD}" ] || CO_PWD=/Applications/CrossOver.app/Contents/MacOS
-[ -d "${CO_PWD}" ] || { echo "[ERROR] Could not locate CrossOver binary. Exiting."; exit 1; }
+while [ ! -d "${CO_PWD}" ]; do
+    echo "[ERROR] Application not valid. Please provide the binary location."
+    read -r -p "Location: " CO_PWD
+done
 
 echo "[INFO] CrossOver path: ${CO_PWD}"
 
@@ -37,7 +32,9 @@ else
 fi
 
 # Clean bottle system.reg entries
-BOTTLE_DIR=~/Library/Application\ Support/CrossOver/Bottles
+BOTTLE_DIR="$(defaults read com.codeweavers.CrossOver BottleDir 2>/dev/null)"
+BOTTLE_DIR="${BOTTLE_DIR:-$HOME/Library/Application Support/CrossOver/Bottles}"
+BOTTLE_DIR="${BOTTLE_DIR/#\~/$HOME}"
 echo "[INFO] Cleaning system.reg entries from bottles..."
 for file in "${BOTTLE_DIR}"/*/system.reg; do
     [ -f "${file}" ] || continue
