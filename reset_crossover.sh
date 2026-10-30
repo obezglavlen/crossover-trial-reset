@@ -7,7 +7,7 @@ echo
 # Locate CrossOver binary
 # Locate CrossOver binary
 path=/Applications/CrossOver.app/Contents/MacOS
-CO_PWD="$HOME/$path"
+CO_PWD="$HOME$path"
 
 [ -d "${CP_PWD}" ] || CO_PWD="$path"
 while [ ! -d "${CO_PWD}" ]; do
